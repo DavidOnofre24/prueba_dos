@@ -18,6 +18,7 @@ class _HomeProductsState extends State<HomeProducts> {
         _sectionGrey(),
         _title(),
         _rowFilters(),
+        _filterProduct(),
       ])));
 
   AppBar _appBar() => AppBar(
@@ -117,6 +118,42 @@ class _HomeProductsState extends State<HomeProducts> {
       alignment: Alignment.centerLeft,
       child: const Text('Snacks',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)));
+
+  Container _filterProduct() => Container(
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        child: IntrinsicHeight(
+            child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(width: 10),
+                      for (int i = 0; i < 10; i++) _filterProductCard(i == 3)
+                    ]))),
+      ));
+
+  GestureDetector _filterProductCard(bool isSelect) => GestureDetector(
+      onTap: () {},
+      child: Container(
+          padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.only(right: 10),
+          decoration: BoxDecoration(
+              color: isSelect ? AppColors.appIconColor : Colors.transparent,
+              border: Border.all(
+                  color: isSelect
+                      ? AppColors.appIconColor
+                      : AppColors.appTextLightColor),
+              borderRadius: BorderRadius.circular(20)),
+          child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              alignment: Alignment.center,
+              child: Text('Todas',
+                  style: isSelect ? const TextStyle(color: Colors.white) : null,
+                  textAlign: TextAlign.center))));
 
   Row _rowFilters() => Row(children: [
         const SizedBox(width: 10),
