@@ -19,6 +19,10 @@ class _HomeProductsState extends State<HomeProducts> {
         _title(),
         _rowFilters(),
         _filterProduct(),
+        Row(children: [_product(isCounter: true), _product()]),
+        Row(children: [_product(), _product()]),
+        Row(children: [_product(), _product()]),
+        const SizedBox(height: 100)
       ])));
 
   AppBar _appBar() => AppBar(
@@ -306,4 +310,105 @@ class _HomeProductsState extends State<HomeProducts> {
                                   color: AppColors.appGreenColor)))
                     ])
               : Text(text)));
+
+  Widget _product({bool isCounter = false}) => Container(
+        margin: const EdgeInsets.only(left: 16, bottom: 10),
+        child: Column(children: [
+          SizedBox(
+              width:
+                  (MediaQuery.of(context).orientation == Orientation.portrait)
+                      ? MediaQuery.of(context).size.width / 2.3
+                      : MediaQuery.of(context).size.width / 3,
+              child: Builder(builder: (_) {
+                return Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Stack(children: [
+                        ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            child: Material(
+                                elevation: 1,
+                                child: SizedBox(
+                                    width: double.infinity,
+                                    child: Image.asset('assets/2.png',
+                                        fit: BoxFit.fill)))),
+                        Container(
+                            alignment: Alignment.topLeft,
+                            margin: const EdgeInsets.only(top: 5, left: 5),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 2),
+                                    color: AppColors.appGreenColor,
+                                    child: const Text('En oferta',
+                                        style:
+                                            TextStyle(color: Colors.white)))))
+                      ]),
+                      Material(
+                          elevation: 2,
+                          color: Colors.white,
+                          borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5)),
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5))),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 3) +
+                                      const EdgeInsets.only(top: 2),
+                              child: SizedBox(
+                                  height: 170,
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 5),
+                                        const Text(
+                                            'Nombre del producto sjdajdsakdjasdajsd adjsapdj ao',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3),
+                                        const SizedBox(height: 2),
+                                        const Text('12 gr',
+                                            style: TextStyle(fontSize: 12)),
+                                        const SizedBox(height: 2),
+                                        const Text('Gozana',
+                                            style: TextStyle(
+                                                color:
+                                                    AppColors.appGreenColor)),
+                                        const SizedBox(height: 5),
+                                        Wrap(children: [
+                                          const Text('S/ 15.00',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w900)),
+                                          const SizedBox(width: 15),
+                                          Container(
+                                              margin:
+                                                  const EdgeInsets.only(top: 3),
+                                              child: Text('S/ 19.00',
+                                                  style: const TextStyle(
+                                                          fontSize: 12)
+                                                      .copyWith(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough))),
+                                          const SizedBox(height: 10),
+                                          _button('Agregar',
+                                              isCounter: isCounter)
+                                        ]),
+                                        const SizedBox(height: 5),
+                                      ]))))
+                    ]);
+              }))
+        ]),
+      );
 }
